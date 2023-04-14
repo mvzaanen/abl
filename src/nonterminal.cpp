@@ -7,10 +7,7 @@
  **                 represent integer numbers. When nonterminals should be
  **                 represented as strings, a conversion is needed.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen  (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: nonterminal.cpp,v 1.6 2006/09/18 13:23:43 jeroen Exp $
+ **   Version     : $Id: nonterminal.cpp 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package

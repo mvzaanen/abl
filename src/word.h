@@ -6,10 +6,7 @@
  **                 It is used to store a word in the form of a string. A 
  **                 word is delimited by whitespaces.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen  (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: word.h,v 1.7 2006/09/18 13:23:45 jeroen Exp $
+ **   Version     : $Id: word.h 3755 2010-02-19 11:23:46Z menno $
  **
  *******************************************************************************
  **   This file is part of the Alignment-Based Learning package

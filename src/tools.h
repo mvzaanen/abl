@@ -4,10 +4,7 @@
  **
  **   Description : This file contains several generic functions.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 Jeroen Geertzen (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: tools.h,v 1.8 2006/09/18 13:23:44 jeroen Exp $
+ **   Version     : $Id: tools.h 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
@@ -19,6 +16,7 @@
 #ifndef __tools__
 #define __tools__
 
+#include <stdlib.h>
 #include <string>
 #include <ctime>
 

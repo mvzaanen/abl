@@ -7,14 +7,7 @@
  **                 occuring patterns and to hypothesize constituents given
  **                 these patterns.
  **
- **   Authors     : Jeroen Geertzen (j.geertzen@uvt.nl)
- **
- **                 This suffix tree implementation may be (re)used freely
- **                 for research or educational purposes, assuming that
- **                 credit is given to the author. For other use, please
- **                 contact the author.
- **
- **   Version     : $Id: suffixtree.h,v 1.2 2006/09/18 13:23:44 jeroen Exp $
+ **   Version     : $Id: suffixtree.h 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
@@ -40,7 +33,7 @@ typedef map<int,int> cb;
 namespace ns_suffixtree {
 
 // used to indicate either a opening bracket or a closing bracket
-typedef struct constituentborder {
+struct constituentborder {
    int p;        // position of bracket in the sentence
    int n;        // non-terminal
 };

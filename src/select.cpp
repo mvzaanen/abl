@@ -5,10 +5,7 @@
  **   Description : This file implements the clustering part of the aligning
  **                 phase.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: select.cpp,v 1.12 2006/09/18 13:23:43 jeroen Exp $
+ **   Version     : $Id: select.cpp 3780 2010-02-23 12:21:11Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
@@ -20,6 +17,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <iomanip>
@@ -130,7 +128,7 @@ Rand r;
 
 void
 usage() {
-   cerr << "ABL " << VERSION << " (C) Macquarie University 2006." << endl;
+   cerr << "ABL " << VERSION << endl;
    cerr << "Alignment-Based Learner" << endl;
    cerr << __DATE__ << " " << __TIME__ << "\n" << endl;
    cerr << "Usage:" << program_name;

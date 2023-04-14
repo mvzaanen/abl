@@ -1,23 +1,24 @@
 # ABL README
 
-Alignment-Based Learning (ABL) is a symbolic grammar inference framework that
-has succesfully been applied for several unsupervised machine learning tasks
-in Natural Language Processing (NLP). Given sequences of symbols only, a
-system that implements ABL induces structure by aligning and comparing the
-input sequences. As a result, the input sequences are augmented with the
-induced structure. For more information, see the reference list at the end of
-this file.
+Alignment-Based Learning (ABL) is a symbolic grammar inference
+framework that has succesfully been applied for several unsupervised
+machine learning tasks in Natural Language Processing (NLP).  Given
+sequences of symbols only, a system that implements ABL induces
+structure by aligning and comparing the input sequences.  As a result,
+the input sequences are augmented with the induced structure.  For more
+information, see the reference list at the end of this file.
 
-This package contains a C++ implementation of ABL. It is maintained by:
+This package contains a C++ implementation of ABL.  It is maintained
+by:
 
-   Menno van Zaanen (menno@ics.mq.edu.au)
+   Menno van Zaanen (mvzaanen@uvt.nl)
 
 The latest version of this package can be found on:
 
-   http://www.ics.mq.edu.au/~menno/research/software/abl/
+   http://ilk.uvt.nl/~menno/research/software/abl
 
-For any questions, remarks, bugs, improvements, or any other matters of
-concern about this package, send an email to: menno@ics.mq.edu.au.
+For any questions, remarks, bugs, improvements, or any other matters
+of concern about this package, send an email to: mvzaanen@uvt.nl
 
 
 # IMPORTANT FILES
@@ -26,28 +27,19 @@ Please read the following before using this ABL package:
 
 LICENCE     : conditions and terms for using this software
 INSTALL     : information on installing this software
-NEWS        : what is new in this version
 
 
 # REQUIREMENTS
 
-The ABL package should run on any standard UNIX based platform. It requires a
-C++ compiler (> GCC 3.0). We have succesfully compiled and tested it on the
-following platforms:
-
-- GNU/Linux:
-   Slackware 10.0 with gcc-3.3.4
-   Debian 3.1 with gcc-4.0.3
-   SuSE 8.3 with gcc-3.3.3
-
-- SunOS:
-   5.9 with gcc-3.4.4
+The ABL package should run on any standard UNIX based platform.  It
+requires a C++ compiler (> GCC 3.0).
 
 # ACKNOWLEDGEMENTS
 
-The ABL package was developed by Menno van Zaanen (Macquarie University) and
-Jeroen Geertzen (Tilburg University). The project was financially supported
-with a grant from Macquarie University.
+The ABL package was developed by Menno van Zaanen (Tilburg University,
+The Netherlands) and Jeroen Geertzen (University of Cambridge, UK).
+The project was partially supported financially with a grant from
+Macquarie University, Australia.
 
 
 # REFERENCES

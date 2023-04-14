@@ -7,10 +7,7 @@
  **                 is useful (when aligning) to insert unique trees only.
  **                 This implementation does not do this.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen  (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: treebank.cpp,v 1.9 2006/09/18 13:23:45 jeroen Exp $
+ **   Version     : $Id: treebank.cpp 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
@@ -55,7 +52,7 @@ void Treebank::write(ostream& os) const throw() {
 
 void Treebank::read_partial(istream& is) throw() {
    int tree_nr;
-   char *colon=":";
+   string colon=":";
    is >> colon >> tree_nr;
    Tree t;
 

@@ -5,10 +5,7 @@
  **   Description : This file contains the definition of the class 
  **                 all_alignment.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: all_alignment.h,v 1.7 2006/09/18 13:23:43 jeroen Exp $
+ **   Version     : $Id: all_alignment.h 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package

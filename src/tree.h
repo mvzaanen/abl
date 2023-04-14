@@ -5,10 +5,7 @@
  **   Description : This file contains the definition of the class Tree.
  **                 A tree is a sentence with a vector of 0..n constituents.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen  (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: tree.h,v 1.9 2006/09/18 13:23:44 jeroen Exp $
+ **   Version     : $Id: tree.h 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
@@ -23,6 +20,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "constituent.h"
 #include "sentence.h"
 

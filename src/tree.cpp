@@ -5,10 +5,7 @@
  **   Description : This file contains the definition of the class Tree.
  **                 A tree is a sentence with a vector of 0..n constituents.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen  (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: tree.cpp,v 1.11 2006/10/26 04:08:55 menno Exp $
+ **   Version     : $Id: tree.cpp 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package

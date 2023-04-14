@@ -1,15 +1,21 @@
-/*******************************************************************************
-** Menno van Zaanen
-** menno@comp.leeds.ac.uk     1998-2001
-** mvzaanen@science.uva.nl
-********************************************************************************
-** Filename: edit_distance.h
-********************************************************************************
-** This program is part of the Alignment-Based Learning package.
-********************************************************************************
-** This file contains the abstract base class Edit_operation. Specific
-** instances of the edit distance algorithm may be derived from this class.
-*******************************************************************************/
+/******************************************************************************»
+ **
+ **   Filename    : edit_distance.h
+ **
+ **   Description : This file contains the abstract base class
+ **                 Edit_operation. Specific instances of the edit
+ **                 distance algorithm may be derived from this class.
+ **
+ **   Version     : $Id: edit_distance.h 3755 2010-02-19 11:23:46Z menno $
+ **
+ ******************************************************************************»
+ **   This file is part of the Alignment-Based Learning package
+ **
+ **   See the file "LICENCE" for information on usage and redistribution
+ **   of this file, and for a DISCLAIMER OF ALL WARRANTIES.
+ ******************************************************************************»
+ */
+
 #ifndef __edit_distance__
 #define __edit_distance__
 

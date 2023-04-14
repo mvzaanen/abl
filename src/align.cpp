@@ -4,10 +4,7 @@
  **
  **   Description : This file implements the aligning phase.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: align.cpp,v 1.15 2006/09/18 13:23:42 jeroen Exp $
+ **   Version     : $Id: align.cpp 3780 2010-02-23 12:21:11Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
@@ -23,6 +20,7 @@
 #include <iomanip>
 #include <utility>
 #include <ctime>
+#include <cstring>
 #include "all_alignment.h"
 #include "constituent.h"
 #include "edit_distance.h"
@@ -172,7 +170,7 @@ int seed=0;
 
 
 void usage() {
-   cerr << "ABL " << VERSION << " (C) Macquarie University 2006." << endl;
+   cerr << "ABL " << VERSION << endl;
    cerr << "Alignment-Based Learner" << endl;
    cerr << __DATE__ << " " << __TIME__ << "\n" << endl;
    cerr << "Usage:" << program_name;

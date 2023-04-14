@@ -5,10 +5,7 @@
  **   Description : This file contains the definition of the class Sentence.
  **                 A sentence is delimited by a newline.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: sentence.h,v 1.8 2006/09/18 13:23:44 jeroen Exp $
+ **   Version     : $Id: sentence.h 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package

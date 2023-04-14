@@ -49,4 +49,4 @@ abl_cluster_SOURCES = cluster.cpp \
                 word.h \
                 word.cpp
 
-# $Id: Makefile.am,v 1.9 2006/07/27 12:03:50 jeroen Exp $
+# $Id: Makefile.am 3755 2010-02-19 11:23:46Z menno $

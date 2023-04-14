@@ -5,10 +5,7 @@
  **   Description : This file contains the definition of the class 
  **                 Edit_operations.
  **
- **   Authors     : Menno van Zaanen (menno@ics.mq.edu.au)
- **                 modified by Jeroen Geertzen  (j.geertzen@uvt.nl)
- **
- **   Version     : $Id: edit_operations.h,v 1.8 2006/12/12 02:08:31 jeroen Exp $
+ **   Version     : $Id: edit_operations.h 3755 2010-02-19 11:23:46Z menno $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
