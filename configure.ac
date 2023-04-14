@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([ABL],[1.0],[menno@ics.mq.ed.au])
+AC_INIT([ABL],[1.1],[menno@ics.mq.ed.au])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/tree.cpp])
 AC_CONFIG_HEADER([config.h])
@@ -32,4 +32,4 @@ AC_CONFIG_FILES([doc/Makefile src/Makefile])
 AC_OUTPUT
 
 
-# $Id: configure.ac,v 1.4 2006/12/18 05:38:24 menno Exp $
+# $Id: configure.ac,v 1.5 2007/03/12 05:10:00 menno Exp $

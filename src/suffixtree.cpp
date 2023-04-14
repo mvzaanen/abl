@@ -14,7 +14,7 @@
  **                 credit is given to the author. For other use, please
  **                 contact the author.
  **
- **   Version     : $Id: suffixtree.cpp,v 1.3 2006/09/18 13:23:44 jeroen Exp $
+ **   Version     : $Id: suffixtree.cpp,v 1.4 2007/03/12 04:51:44 menno Exp $
  **
  ******************************************************************************»
  **   This file is part of the Alignment-Based Learning package
@@ -142,7 +142,7 @@ void Suffixtree::add_prefix( Suffix &active, int pos_stop ) {
          int cnode = active.origin_node;
          int pnode;
 
-         while (cnode != 1) {
+         while (cnode > 1) {
             pnode = cnode;
             cnode = prevnode[pnode];
 

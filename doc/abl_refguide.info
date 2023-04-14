@@ -1,5 +1,5 @@
-This is ../../doc/abl_refguide.info, produced by makeinfo version 4.8
-from ../../doc/abl_refguide.texi.
+This is abl_refguide.info, produced by makeinfo version 4.8 from
+abl_refguide.texi.
 
    Alignment-Based Learning Reference Guide
 
@@ -926,36 +926,36 @@ Wagner and Fischer, 1974
 
 
 Tag Table:
-Node: Top227
-Node: License terms2307
-Node: Installation5591
-Node: Software usage6967
-Node: Using ABL7485
-Node: Alignment learning9096
-Node: Clustering11122
-Node: Selection learning12917
-Node: Practical issues15431
-Node: Using pipes15907
-Node: Supported character sets17742
-Node: Empty hypotheses18294
-Node: Alignment learning methods19132
-Node: wagner_min20464
-Node: wagner_biased21038
-Node: all22316
-Node: suffixtrees23001
-Node: st123561
-Node: st224177
-Node: st324663
-Node: st425091
-Node: baselines25602
-Node: Selection learning methods26276
-Node: first27148
-Node: leaf27666
-Node: branch28221
-Node: Optimising ABL usage28848
-Node: Exhaustive or smart29339
-Node: Generating or projecting31660
-Node: Concept index32562
-Node: Bibliography35032
+Node: Top207
+Node: License terms2287
+Node: Installation5571
+Node: Software usage6947
+Node: Using ABL7465
+Node: Alignment learning9076
+Node: Clustering11102
+Node: Selection learning12897
+Node: Practical issues15411
+Node: Using pipes15887
+Node: Supported character sets17722
+Node: Empty hypotheses18274
+Node: Alignment learning methods19112
+Node: wagner_min20444
+Node: wagner_biased21018
+Node: all22296
+Node: suffixtrees22981
+Node: st123541
+Node: st224157
+Node: st324643
+Node: st425071
+Node: baselines25582
+Node: Selection learning methods26256
+Node: first27128
+Node: leaf27646
+Node: branch28201
+Node: Optimising ABL usage28828
+Node: Exhaustive or smart29319
+Node: Generating or projecting31640
+Node: Concept index32542
+Node: Bibliography35012
 
 End Tag Table
