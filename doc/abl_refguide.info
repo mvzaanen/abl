@@ -1,0 +1,961 @@
+This is ../../doc/abl_refguide.info, produced by makeinfo version 4.8
+from ../../doc/abl_refguide.texi.
+
+   Alignment-Based Learning Reference Guide
+
+   Copyright 2006, Jeroen Geertzen, Menno van Zaanen, Macquarie
+University.
+
+
+File: abl_refguide.info,  Node: Top,  Next: License terms,  Up: (dir)
+
+Alignment-Based Learning Reference Guide
+****************************************
+
+Alignment-Based Learning Reference Guide
+
+   Copyright 2006, Jeroen Geertzen, Menno van Zaanen, Macquarie
+University.
+
+   Alignment-Based Learning (ABL) is a symbolic grammar inference
+framework that has been applied successfully to several unsupervised
+machine learning tasks in Natural Language Processing (NLP).  Given
+sequences of symbols, ABL induces structure by aligning and comparing
+the input sequences.  Regularities in the input sequences are used to
+assign structure to the sequences.
+
+   ABL consists of three phases.  The first phase, _alignment
+learning_, builds a search space of possible structures, called
+_hypotheses_, by comparing the sequences.  The second phase, called
+_clustering_ clusters subsequences that share similar context.  In the
+third phase, _selection learning_, the most probable combination of
+hypothesised structure is selected.
+
+   We believe the implementation of ABL presented here will be
+beneficial for further explorations in applying alignment-based grammar
+inference to different tasks and will turn out to be useful for
+unsupervised machine learning research in NLP and other areas.
+
+   The current implementation is derived from the software used in `van
+Zaanen, 2002'.  Several improvements and extensions have been made
+since.  For example, the input and output formats have been simplified
+and the suffix tree algorithms have been added.  The results generated
+using this system should still be the same with respect to the original
+system.
+
+   We would appreciate it if you send bug reports (or even patches),
+ideas for extensions, extensions that could be included in future
+releases, as well as comments and feedback on this manual and the
+software itself, to <menno@ics.mq.edu.au>.
+
+* Menu:
+
+* License terms::
+* Installation::
+* Optimising ABL usage::
+* Selection learning methods::
+* Alignment learning methods::
+* Software usage::
+* Concept index::
+* Bibliography::
+
+
+File: abl_refguide.info,  Node: License terms,  Next: Installation,  Prev: Top,  Up: Top
+
+1 License terms
+***************
+
+Downloading and using the ABL software implies that you accept the
+following terms:
+
+   Macquarie University (henceforth "Licensers") grants you, the
+registered user (henceforth "User") the non-exclusive license to
+download a single copy of the ABL implementation software code and
+related documentation (henceforth jointly referred to as "Software")
+and to use the copy of the code and documentation solely in accordance
+with the following terms and conditions:
+
+  1. The license is only valid when you register as a user.  If you
+     have obtained a copy without registration, you must immediately
+     register by sending an e-mail to <menno@ics.mq.edu.au>.
+
+  2. User may only use the Software for educational or non-commercial
+     research purposes.
+
+  3. Users may make and use copies of the Software internally for their
+     own use.
+
+  4. Without executing an applicable commercial license with Licensers,
+     no part of the code may be sold, offered for sale, or made
+     accessible on a computer network external to your own or your
+     organisation's in any format; nor may commercial services utilising
+     the code be sold or offered for sale.  No other licenses are
+     granted or implied.
+
+  5. Licensers have no obligation to support the Software it is
+     providing under this license.  To the extent permitted under the
+     applicable law, Licensers are licensing the Software "AS IS", with
+     no express or implied warranties of any kind, including, but not
+     limited to, any implied warranties of merchantability or fitness
+     for any particular purpose or warranties against infringement of
+     any proprietary rights of a third party and will not be liable to
+     you for any consequential, incidental, or special damages or for
+     any claim by any third party.
+
+  6. Under this license, the copyright for the Software remains the
+     property of the Centre for Language Technology at Macquarie
+     University.  Except as specifically authorised by the above
+     licensing agreement, User may not use, copy or transfer this code,
+     in any form, in whole or in part.
+
+  7. Licensers may at any time assign or transfer all or part of their
+     interests in any rights to the Software, and to this license, to
+     an affiliated or unaffiliated company or person.
+
+  8. Licensers shall have the right to terminate this license at any
+     time by written notice.  User shall be liable for any infringement
+     or damages resulting from User's failure to abide by the terms of
+     this License.
+
+  9. In publication of research that makes use of the Software, a
+     citation should be given of: Menno van Zaanen and Jeroen Geertzen
+     (2006).  ABL: Alignment-based Learner, version 1.0, Reference
+     Guide, Available from
+     <http://www.ics.mq.edu.au/~menno/research/software/abl/>.
+
+ 10. For information about commercial licenses for the Software,
+     contact <menno@ics.mq.edu.au>, or send your request in writing to:
+
+     Menno van Zaanen
+     Division of Information and Communication Sciences (ICS)
+     Department of Computing
+     Macquarie University
+     2109 North Ryde, NSW
+     Australia
+
+
+
+File: abl_refguide.info,  Node: Installation,  Next: Optimising ABL usage,  Prev: License terms,  Up: Top
+
+2 Installation
+**************
+
+The ABL software package can be found at
+<http://www.ics.mq.edu.au/~menno/research/software/abl/>
+
+   Before downloading the file `abl-1.0.tar.gz', send an email to
+<menno@ics.mq.edu.au> to let us know that you are going to use the ABL
+package and please explain what you are going to use it for.  The file
+is a gzipped tar archive that contains the ABL software package, the
+license, and documentation.
+
+   To install the package on your UNIX based system system, issue the
+following command from the command line prompt.
+
+     tar xvzf abl-1.0.tar.gz
+
+   As a result, a directory `abl-1.0' will be created.  Enter this
+directory and compile the software.
+
+     cd abl-1.0/
+     ./configure
+     make
+     make install
+
+   If the process was successful, three new commands are available:
+`abl_align', `abl_cluster', and `abl_select'.  Additionally, in the
+directory `abl-1.0', a `doc' directory has been created with different
+versions of this document.
+
+   The software is now ready to be used.  For each program, its usage
+can be found by running the command (on the command line) using the
+switch `-h' or `--help'.  For any questions on compiling, installing,
+or using the software, please send a message to <menno@ics.mq.edu.au>.
+
+
+File: abl_refguide.info,  Node: Software usage,  Next: Concept index,  Prev: Alignment learning methods,  Up: Top
+
+3 Software usage
+****************
+
+This chapter shows how to use the ABL software package by illustrating
+the steps in the grammar induction process, the commands to be issued,
+how to select specific algorithms and metrics by setting the right
+parameters, and other practical issues.  The instructions are
+exemplified by simple natural language examples.
+
+* Menu:
+
+* Using ABL::
+* Practical issues::
+
+
+File: abl_refguide.info,  Node: Using ABL,  Next: Practical issues,  Up: Software usage
+
+3.1 Using ABL
+=============
+
+Alignment-based learning (`van Zaanen, 2002') is a three phase
+algorithm with different possible instantiations.  In the first phase,
+called _alignment learning_, sequences of symbols (in our examples
+sentences of words) are compared to find possible constituents
+(hypotheses).  After alignment learning, the second phase clusters
+hypothesised constituents with similar context together.  We will refer
+to this step as _clustering_.  In the third phase, called _selection
+learning_, the most probable combination of hypotheses are selected to
+be the induced constituents.  These three phases all have their own
+programs in the package.  Normally, these programs are run in sequence:
+alignment learning first using `abl_align', followed by clustering using
+`abl_cluster', and finally selection learning using `abl_select'.
+
+   All programs in the ABL package have at least the following six
+options:
+`-i, --input'
+     This option specifies the input file.
+
+`-o, --output'
+     This option specifies the output file.
+
+`-h, --help'
+     This option dumps the usage of the program on standard output.
+
+`-V, --version'
+     This option dumps the version of the program on standard output.
+
+`-v, --verbose'
+     This option runs the program with verbose output.
+
+`-d, --debug'
+     This option provides debug information.
+
+   The programs may also have additional options, which will be
+described in the following sections.
+
+* Menu:
+
+* Alignment learning::
+* Clustering::
+* Selection learning::
+
+
+File: abl_refguide.info,  Node: Alignment learning,  Next: Clustering,  Up: Using ABL
+
+3.1.1 Alignment learning
+------------------------
+
+Let us consider the following example-corpus of plain text sentences
+with one sentence per line in a file called `ex01.txt'
+
+     she is smart
+     she is tired
+
+   To do alignment learning on this file, we give the following command
+on the command line prompt
+
+     abl_align -i ex01.txt -o ex01.txt.aligned -a wm -p u
+
+   The `-i' (or `--input') parameter and `-o' (or `--output') parameter
+specify input and output files respectively.  With the `-a' (or
+`--align') parameter, the alignment algorithm or method is selected.
+See *Note Alignment learning methods:: for an overview and explanation
+of all alignment methods.  In this case, by providing `-a wm' (or `-a
+wagner_min') we use unbiased string edit distance (`Wagner and Fisher,
+1974').  The `-p' (or `--part') parameter specifies which part of the
+sentence to consider as possible constituents, which is usually the
+unequal parts (`-p u' or `-p unequal').  The resulting output (in ABL
+format), for each sentence will be the sentence itself followed by one
+or more hypotheses.  The sentence and hypotheses are delimited by the
+string `@@@'.  The contents of `ex01.txt.aligned' after running the
+above command should be
+
+     she is smart @@@ (0,3,[0])(2,3,[1])
+     she is tired @@@ (2,3,[1])(0,3,[0])
+
+   As can be observed in the output, a hypothesis or constituent is
+formatted in the following way
+
+     (A,B,[C])
+
+where non-terminal `C' spans from position `A' in the sentence to
+position `B' in the sentence. As such, the output in file
+`ex01.txt.aligned' can also be visualised as follows
+
+     (she is (smart)_[1])_[0]
+     (she is (tired)_[1])_[0]
+
+   Those parts that are unequal in both sentences are grouped into the
+same equivalence class (as was selected using `-p').  In the remainder
+of this document we will use the parenthesised representation instead
+of the ABL representation for the sake of readability.
+
+
+File: abl_refguide.info,  Node: Clustering,  Next: Selection learning,  Prev: Alignment learning,  Up: Using ABL
+
+3.1.2 Clustering
+----------------
+
+The string edit distance based alignment algorithms in the alignment
+learning phase work by pairwise comparison of sentences in the corpus.
+As a result of these comparisons, hypotheses can have multiple
+non-terminals that all share the same context.  What is needed is a
+_clustering_ step that combines or clusters these
+same-context-non-terminals to a single non-terminal.  E.g. when we
+apply alignment learning on the following input of file `ex02.txt'
+
+     she works well
+     she sings well
+     she listens well
+
+we will obtain the following structure after alignment learning
+
+     (she (works)_[1, 2] well)_[0]
+     (she (sings)_[1, 3] well)_[0]
+     (she (listens)_[2, 3] well)_[0]
+
+   By default, `abl_align' already performs some clustering.  To turn
+the alignment learning internal clustering off, use the `-n' or
+`--nomerge' option with `abl_align'.  This will greatly increase the
+number of non-terminals generated, which may (especially in larger
+input files) result in very large file sizes.
+
+   In this output hypotheses `1, 2', `1, 3', and `2, 3' share the same
+context.  We can cluster all non-terminals that share the same context
+with the following command
+
+     abl_cluster -i ex01.txt.aligned -o ex01.txt.clustered
+
+in which the `-i' (or `--input') and `-o' (or `--output') parameter
+specify input and output files respectively.  After clustering, the
+resulting file, `ex01.txt.clustered', will have the following content
+
+     (she (works)_[1] well)_[0]
+     (she (sings)_[1] well)_[0]
+     (she (listens)_[1] well)_[0]
+
+   `abl_cluster' only has the `-i' (or `--input') and `-o' (or
+`--output') options and no others.
+
+
+File: abl_refguide.info,  Node: Selection learning,  Prev: Clustering,  Up: Using ABL
+
+3.1.3 Selection learning
+------------------------
+
+The set of hypotheses that are generated during alignment learning may
+contain hypotheses that are unlikely to be correct constituents.  We
+assume the underlying grammar to be induced is context-free and that
+the learnt structure is a derivation using that context-free grammar.
+This implies that overlapping constituents (crossing brackets) are
+unacceptable.  In the selection learning phase, the most probable
+combination of hypotheses from all hypotheses that are generated by the
+alignment learning phase is selected according to a specific metric.
+
+   Let us consider the following sentences in file `ex03.txt'
+
+     she runs from CBD to Bondi
+     he drives from CBD to Bondi
+     he walks terribly slow
+
+the resulting output after alignment learning and clustering (in
+`ex03.txt.clustered') is as follows
+
+     (_[0](_[1] she runs)_[1] (from CBD to Bondi)_[0]
+     (_[0](_[1] he (_[2] drives)_[1] from CBD to Bondi)_[2])_[0]
+     (_[0] he (_[2] walks terribly slow)_[2])_[0]
+
+   Here we also label opening brackets to indicate which opening bracket
+corresponds to which closing bracket.  This is necessary, because there
+are pairs of brackets that overlap.  As can be seen in the example, the
+hypotheses with non-terminal labels `1' and `2' overlap in the second
+sentence.  To resolve this, we can apply selection learning on file
+`ex03.txt.clustered' by issuing the following command
+
+     abl_select -i ex03.txt.clustered -o ex03.txt.selected -s b
+
+in which the `-i' (or `--input') and `-o' (or `--output') parameter
+specify input and output files respectively.  The `-s' (or `--select')
+parameter specifies the selection method.  In this case, the branch
+selection method has been selected.  See *Note Selection learning
+methods:: for an overview and explanation of all selection methods.
+After applying selection learning, the resulting output in
+`ex03.txt.selected' contains for each sentence constituents that are
+not overlapping
+
+     ((she runs)_[1] from CBD to Bondi)_[0]
+     ((he drives)_[1] from CBD to Bondi)_[0]
+     (he (walks terribly slow)_[2])_[0]
+
+   The selection learning method has discarded a hypothesis with
+non-terminal label `2' in the second sentence.
+
+   When using a large corpus as input on machines that are low on
+internal memory, the switch `-m' or `--preserve_mem' can be used to
+preserve memory use at the cost of execution speed.
+
+
+File: abl_refguide.info,  Node: Practical issues,  Prev: Using ABL,  Up: Software usage
+
+3.2 Practical issues
+====================
+
+There are some practical issues when running programs from the ABL
+package that will be discussed here.  These do not necessarily affect
+output (although the number of empty hypotheses may be affected), but
+these issues mainly have an impact on performance (time).
+
+* Menu:
+
+* Using pipes::
+* Supported character sets::
+* Empty hypotheses::
+
+
+File: abl_refguide.info,  Node: Using pipes,  Next: Supported character sets,  Up: Practical issues
+
+3.2.1 Using pipes
+-----------------
+
+All three programs, `abl_align', `abl_cluster', and `abl_select' are
+able to both read/write from files and read/write to standard input and
+standard output.  The latter possibility allows these programs to be
+run in sequence by using pipes.  For example, the following command
+
+     abl_align -a wm -p u | abl_cluster | abl_select -s b
+
+allows a user to type sentences on standard input (which can be closed
+when done with <CTRL>-d) after which the induced structure is printed
+on the standard output.  Likewise, the following commands
+
+     cat in.txt | abl_align -a wm -p u | abl_cluster \
+        | abl_select -s b > out.txt
+
+applies the complete ABL process to file `in.txt' and saves the induced
+structure in file `out.txt'.
+
+   To get to know what is happening during each phase, we can use the
+`-v' or `--verbose' switch on each program.  Apart from the data to the
+file `out.txt', status information is written to the terminal.  E.g.:
+
+     ./abl_align   : # sentences loaded            : 61
+     ./abl_align   : # hypotheses generated        : 520
+     ./abl_align   : # seconds execution time      : 0.02
+     ./abl_cluster : # sentences loaded            : 61
+     ./abl_cluster : # hypotheses loaded           : 520
+     ./abl_cluster : # unique non-terminals input  : 1058
+     ./abl_cluster : # unique non-terminals output : 145
+     ./abl_cluster : # hypotheses clustered        : 913 (0.86)
+     ./abl_cluster : # seconds execution time      : 0.03
+     ./abl_select  : # sentences loaded            : 61
+     ./abl_select  : # hypotheses loaded           : 520
+     ./abl_select  : # hypotheses selected         : 361
+     ./abl_select  : # seconds execution time      : 0.02
+
+
+File: abl_refguide.info,  Node: Supported character sets,  Next: Empty hypotheses,  Prev: Using pipes,  Up: Practical issues
+
+3.2.2 Supported character sets
+------------------------------
+
+The ABL software supports the use of 7-bit (ASCII) and 8-bit (extended
+ASCII, ISO-8859) ASCII characters.  There is no _special_ support for
+handling unicode characters.  Words in sentences can contain any
+character from these encodings, except for spaces (word delimiters),
+newlines (sentence delimiters), or the string `@@@'
+(sentence-hypotheses delimiter).
+
+
+File: abl_refguide.info,  Node: Empty hypotheses,  Prev: Supported character sets,  Up: Practical issues
+
+3.2.3 Empty hypotheses
+----------------------
+
+By default, the alignment-learning phase generates so called _empty
+hypotheses_.  These are hypotheses that do not span any word.  Consider
+for example
+
+     (she is (very)_[1] ill)_[0]
+     (she is ()_[1] ill)_[0]
+
+in which the hypothesis with non-terminal label `1' is empty in the
+second sentence.  Depending on the task the output of ABL is used in,
+it might not be desired or necessary to generate empty spans.  In these
+cases, use the `-e' or `--excl_empty' switch on `abl_align' to suppress
+the generation of empty hypotheses.  Taking the sentences from the
+previous example, the output of `abl_align -a wm -p o -e' is
+
+     (she is (very)_[1] ill)_[0]
+     (she is ill)_[0]
+
+
+File: abl_refguide.info,  Node: Alignment learning methods,  Next: Software usage,  Prev: Selection learning methods,  Up: Top
+
+4 Alignment learning methods
+****************************
+
+This version of the ABL implementation supports several alignment
+learning methods that can be specified when using the command
+`abl_align' with `-a' or `--align'.
+
+   Values for `-a': `wm' or `wagner_min'), `wb' or `wagner_biased', and
+`a', `aa' or `all' are all based on the edit distance algorithm
+(`Wagner and Fisher, 1974').  This algorithm finds the minimum edit
+cost to transform one sentence into the other based on a predefined
+cost function.  This function assigns a cost to each of the edit
+operations: insertion, deletion and substitution.
+
+   In addition to the edit distance based methods, there are four
+alignment algorithms that use suffix trees to find the alignments.
+These algorithms are faster and use less memory than the edit distance
+based algorithms, but generally find fewer alignments.
+
+   Finally, there are three baseline systems: `l' or `left', `r' or
+`right', and `b' or `both'.  These do not actually generate alignments,
+but simply compute left, right, or a random choice between left and
+right tree structures on the sentences.
+
+* Menu:
+
+* wagner_min::
+* wagner_biased::
+* all::
+* suffixtrees::
+* baselines::
+
+
+File: abl_refguide.info,  Node: wagner_min,  Next: wagner_biased,  Up: Alignment learning methods
+
+4.1 wagner_min
+==============
+
+The first method, which is called `wagner_min' (this method has also
+been called _default_), uses a cost function that makes the algorithm
+find the longest common subsequences in two sentences just as described
+in the `Wagner and Fischer, 1974' article.  As the groups of words that
+are not in these longest common subsequences are the words that are
+unequal (set by `-p' or `--part') in both sentences, they should be
+stored as hypotheses.
+
+
+File: abl_refguide.info,  Node: wagner_biased,  Next: all,  Prev: wagner_min,  Up: Alignment learning methods
+
+4.2 wagner_biased
+=================
+
+Using the longest common subsequence to find the unequal parts (set by
+`-p' or `--part' of the sentences does not always result in the
+preferred hypotheses.  Consider the following sentences
+
+     ...from Central Business District to Bondi
+     ...from Bondi to Central Business District
+
+   When aligning these sentences using `wagner_min' alignment gives us
+the following output
+
+     ...from ()_[1] Central Business District (to Bondi)_[2]
+     ...from (Bondi to)_[1] Central Business District ()_[2]
+
+which is syntactically undesirable.  The preferred syntactical
+structure emerges when, instead of getting the longest common
+subsequences, we link the word `to', resulting in the following
+alignment
+
+     ...from (Central Business District)_[1] to (Bondi)_[2]
+     ...from (Bondi)_[1] to (Central Business District)_[2]
+
+   To let the system have a preference for linking `to' instead of
+`Central Business District', the cost function that is part of the edit
+distance algorithm is biased towards linking words that have similar
+relative offsets in the sentence.  This alignment learning method is
+called _wagner_biased_.
+
+
+File: abl_refguide.info,  Node: all,  Next: suffixtrees,  Prev: wagner_biased,  Up: Alignment learning methods
+
+4.3 all
+=======
+
+It may be the case that both `wagner_min' and `wagner_biased' do not
+find the "correct" alignment.  A third method `all' tries to solve this
+problem by using all possible alignments based on the edit distance
+algorithm to find hypotheses, making the assumption that during
+selection learning, the correct hypotheses will be selected as
+constituents.  This alignment learning method is called `all'.  Note
+that this method introduces considerably more hypotheses (including
+many overlapping ones) and puts a higher load on the selection learning
+phases.
+
+
+File: abl_refguide.info,  Node: suffixtrees,  Next: baselines,  Prev: all,  Up: Alignment learning methods
+
+4.4 suffixtrees
+===============
+
+There are four methods that use suffix trees to find alignments: _st1_,
+_st2_, _st3_, and _st4_. These alignment methods are all based on
+building a generalized suffix tree (GST) of the corpus and combining
+structural information of common suffixes and prefixes. More elaborate
+information on these methods than given here can be found in (`Geertzen
+and van Zaanen, 2004').
+
+* Menu:
+
+* st1::
+* st2::
+* st3::
+* st4::
+
+
+File: abl_refguide.info,  Node: st1,  Next: st2,  Up: suffixtrees
+
+4.4.1 st1
+---------
+
+In the first method, which is called `st1', locations in the GST where
+one edge branches into multiple edges is marked as a position in the
+sentences involved where hypotheses can start. Since it is less obvious
+where the hypotheses should end, it is assumed that the pair of brackets
+close at the end of sentences. The hypotheses generated by this
+algorithm for the next three sentences are indicated with brackets:
+
+     she \[_[a] is walking away \]_[a]
+     she \[_[a] was walking \]_[a]
+     she \[_[a] runs away \]_[a]
+
+
+File: abl_refguide.info,  Node: st2,  Next: st3,  Prev: st1,  Up: suffixtrees
+
+4.4.2 st2
+---------
+
+To find distinct words followed with joint words (e.g. `away' in the
+first and third sentence in previous section), we can construct a
+generalized prefix tree (GPT). By analyzing the GPT similarly to the
+GST in `st1', we are able to place closing brackets. Since the opening
+brackets cannot be read from the GPT we assume prefix hypotheses to
+start at the beginning of the sentence.
+
+
+File: abl_refguide.info,  Node: st3,  Next: st4,  Prev: st2,  Up: suffixtrees
+
+4.4.3 st3
+---------
+
+The method `st3' combines the alignments of `st1' and `st2', such that
+the hypotheses generated by this algorithm for the three sentences look
+as follows:
+
+       \[_[b] \[_[c] she \[_[a] is \]_[c] walking \]_[b] away \]_[a]
+       \[_[c] she \[_[a] was \]_[c] walking \]_[a]
+       \[_[b] she \[_[a] runs \]_[b] away \]_[a]
+
+
+File: abl_refguide.info,  Node: st4,  Prev: st3,  Up: suffixtrees
+
+4.4.4 st4
+---------
+
+To capture hypotheses that start somewhere in the sentence and stop
+somewhere later in the sentence as well, we introduce `st4', which uses
+both GPT and GST but additionally matches opening and closing brackets,
+such that the hypotheses generated by this algorithm for the three
+sentences look as follows:
+
+       she $[_a$ is $]_b$ walking $]_c$ away
+       she $[_a$ was $]_b$ walking
+       she $[_a$ runs $]_c$ away
+
+
+File: abl_refguide.info,  Node: baselines,  Prev: suffixtrees,  Up: Alignment learning methods
+
+4.5 baselines
+=============
+
+There are three baseline alignment methods included in the ABL
+alignment learning program.  These are selected just as if they are
+proper alignment learning methods (using `-a' or `--align').  `l' or
+`left' generates a left branching tree on top of the sentence,
+similarly `r' or `right' generates a right branching tree.  `b' or
+`both' randomly selects between generating a left or right branching
+tree for each sentence.
+
+   Left branching trees look like
+     (((John) sees) Mary)
+
+   Right branching trees look like
+     (John (sees (Mary)))
+
+
+File: abl_refguide.info,  Node: Selection learning methods,  Next: Alignment learning methods,  Prev: Optimising ABL usage,  Up: Top
+
+5 Selection learning methods
+****************************
+
+This version of the ABL implementation supports three basic selection
+learning methods that can be specified when using `-s' or `--select'
+with the command `abl_select': `f', `first', or `t', `terms', `l',
+`leaf', or `c', `const', `b', `branch'.
+
+   The first method, which we will call _first_ is non-probabilistic
+and the other two (_leaf_ and _branch_) are both probabilistic.  When
+using one of the probabilistic selection learning methods, it may be
+possible that several combinations of hypotheses have the same
+probability (after computing the combined probability).  The system
+then selects one of these combinations at random.
+
+* Menu:
+
+* first::
+* leaf::
+* branch::
+
+
+File: abl_refguide.info,  Node: first,  Next: leaf,  Up: Selection learning methods
+
+5.1 first
+=========
+
+The first method, _first_, is a non-probabilistic method that builds
+upon the assumption that a hypothesis that is learned earlier is always
+correct.  This means that newly learned hypotheses that overlap with
+older ones are considered to be incorrect, and thus should not be kept.
+
+   This is the fastest method, but changing the order of the input
+sentences may change the selected constituents in the end.
+
+
+File: abl_refguide.info,  Node: leaf,  Next: branch,  Prev: first,  Up: Selection learning methods
+
+5.2 leaf
+========
+
+The selection method _leaf_ computes the probability of a hypothesis by
+counting the number of times the particular words of the hypothesis
+have occurred in the learned text as a hypothesis, divided by the total
+number of hypotheses.
+
+   The probability of a combination of hypotheses (which is computed to
+select the best structure for the entire sequence) is computed by
+taking the geometric mean of the combination of hypotheses.
+
+
+File: abl_refguide.info,  Node: branch,  Prev: leaf,  Up: Selection learning methods
+
+5.3 branch
+==========
+
+The selection method _branch_ computes the probability of a hypothesis
+by counting the number of times the particular words of the hypothesis
+have occurred in the learned text as a hypothesis with a specific
+non-terminal label, divided by the total number of hypotheses that have
+that particular non-terminal label.
+
+   The probability of a combination of hypotheses (which is computed to
+select the best structure for the entire sequence) is computed by
+taking the geometric mean of the combination of hypotheses.
+
+
+File: abl_refguide.info,  Node: Optimising ABL usage,  Next: Selection learning methods,  Prev: Installation,  Up: Top
+
+6 Optimising ABL usage
+**********************
+
+Depending on the characteristics of the training data, several options
+in alignment learning and selection learning make it possible to reduce
+the execution time of the algorithm.  In the following two sections,
+the effects of several options are discussed.
+
+* Menu:
+
+* Exhaustive or smart::
+* Generating or projecting::
+
+
+File: abl_refguide.info,  Node: Exhaustive or smart,  Next: Generating or projecting,  Up: Optimising ABL usage
+
+6.1 Exhaustive or smart
+=======================
+
+When using edit distance based alignment learning, each sequence in the
+training data can be compared in pairwise fashion with each other
+sentence in the training data:
+
+     exhaustive_search(S, S_I)
+       S: ordered set of training sentences
+       S_I: i-th sentence
+       forall sentence S_I in S
+         forall sentence S_J in S where J>I
+           compare(S_I, S_J)
+         end forall
+       end forall
+     end exhaustive_search
+
+   Execution of Algorithm `exhaustive_search' results in N(N-1)/2
+pairwise comparisons of sequences.  Because comparing sentences that
+have no words in common will never result in hypothesis generation, the
+number of pairwise comparisons can be reduced:
+
+     reduced_search(S, S_I)
+       S: set of training sentences
+       S_I: i-th sentence
+       forall sentence S_I in S
+         index_words(S_I)
+       end forall
+       forall sentence S_I in S
+         make_compare_list(S_I)
+       end forall
+       forall sentence S_I in compare_list(S_I)
+         forall sentence S_J in S where J>I
+           compare(S_I, S_J)
+         end forall
+       end forall
+     end reduced_search
+
+   When comparing Algorithm `exhaustive_search' with Algorithm
+`reduced_search' in terms of runtime complexity, we can see that in
+Algorithm `reduced_search' reduction of the number of pairwise
+comparisons is achieved at the cost of indexing and listing sentences
+to compare with, two preprocessing steps which are both linear in
+corpus size.  The program `abl_align' uses Algorithm `reduced_search'
+by default.  The second algorithm can be selected by specifying the
+switch `-x' or `--exhaustive' for `abl_align'.  However, there are two
+reasons why Algorithm `exhaustive_search' might be better used instead
+
+_small training set_
+     If the training set is relatively small, or the sentences in the
+     training set have few overlap, the cost of considering twice all
+     sentences in the set does not outweigh the advantage of fewer
+     comparison steps.
+
+_conservative memory usage_
+     When conservative computer memory usage is important, not creating
+     the compare lists for the sentences reduces memory usage.
+
+
+
+File: abl_refguide.info,  Node: Generating or projecting,  Prev: Exhaustive or smart,  Up: Optimising ABL usage
+
+6.2 Generating or projecting
+============================
+
+When `abl_align' has to insert a hypotheses into a tree that already
+has a hypothesis with the same span, it can do two things.
+
+  1. The hypothesis is inserted, which means that the hypothesis now has
+     two distinct non-terminals attached to it.
+
+  2. The hypothesis is not inserted, and the already non-terminal is
+     reused to match the non-terminal of the hypothesis in the other
+     tree.
+
+   By default, `abl_align' takes option 2.  This requires more steps in
+computation, but this is compensated by smaller data structures to
+store the generated hypothesis in.  This optimisation at the cost of
+memory can be switched of with the `-n', `--nomerge' switch, which
+effectively modifies `abl_align' to take option 1.
+
+
+File: abl_refguide.info,  Node: Concept index,  Next: Bibliography,  Prev: Software usage,  Up: Top
+
+Concept index
+*************
+
+ [index ]
+* Menu:
+
+* Alignment learning:                    Alignment learning.    (line 6)
+* Alignment learning methods:            Alignment learning methods.
+                                                                (line 6)
+* all:                                   all.                   (line 6)
+* baselines:                             baselines.             (line 6)
+* branch:                                branch.                (line 6)
+* Clustering:                            Clustering.            (line 6)
+* Empty hypotheses:                      Empty hypotheses.      (line 6)
+* Exhaustive or smart:                   Exhaustive or smart.   (line 6)
+* first:                                 first.                 (line 6)
+* Generating or projecting:              Generating or projecting.
+                                                                (line 6)
+* Installation:                          Installation.          (line 6)
+* leaf:                                  leaf.                  (line 6)
+* License terms:                         License terms.         (line 6)
+* Optimising ABL usage:                  Optimising ABL usage.  (line 6)
+* Practical issues:                      Practical issues.      (line 6)
+* Selection learning:                    Selection learning.    (line 6)
+* Selection learning methods:            Selection learning methods.
+                                                                (line 6)
+* Software usage:                        Software usage.        (line 6)
+* st1:                                   st1.                   (line 6)
+* st2:                                   st2.                   (line 6)
+* st3:                                   st3.                   (line 6)
+* st4:                                   st4.                   (line 6)
+* suffixtrees:                           suffixtrees.           (line 6)
+* Supported character sets:              Supported character sets.
+                                                                (line 6)
+* Using ABL:                             Using ABL.             (line 6)
+* Using pipes:                           Using pipes.           (line 6)
+* wagner_biased:                         wagner_biased.         (line 6)
+* wagner_min:                            wagner_min.            (line 6)
+
+
+File: abl_refguide.info,  Node: Bibliography,  Prev: Concept index,  Up: Top
+
+Bibliography
+************
+
+Geertzen and van Zaanen, 2004
+     Geertzen, J., van Zaanen, M.M. (2004).  Grammatical inference
+     using suffix trees.  In: Proceedings of the 7th International
+     Colloquium on Grammatical Inference (ICGI), pages 163-174, Athens,
+     Greece.
+
+Strik et al., 1997
+     Strik, H., Russel, A., van den Heuvel, H., Cucchiarini, C., and
+     Boves, L.  (1997).  A spoken dialog system for the dutch public
+     transport information service.  International Journal of Speech
+     Technology, 2(2):119-129.
+
+van Zaanen, 2002
+     van Zaanen, M.M. (2002).  Bootstrapping Structure into Language:
+     Alignment-Based Learning.  PhD thesis, University of Leeds, Leeds,
+     UK.
+
+Wagner and Fischer, 1974
+     Wagner, R.A. and Fischer, M.J. (1974).  The string-to-string
+     correction problem.  Journal of the Association for Computing
+     Machinery, 21(1):168-173.
+
+
+
+Tag Table:
+Node: Top227
+Node: License terms2307
+Node: Installation5591
+Node: Software usage6967
+Node: Using ABL7485
+Node: Alignment learning9096
+Node: Clustering11122
+Node: Selection learning12917
+Node: Practical issues15431
+Node: Using pipes15907
+Node: Supported character sets17742
+Node: Empty hypotheses18294
+Node: Alignment learning methods19132
+Node: wagner_min20464
+Node: wagner_biased21038
+Node: all22316
+Node: suffixtrees23001
+Node: st123561
+Node: st224177
+Node: st324663
+Node: st425091
+Node: baselines25602
+Node: Selection learning methods26276
+Node: first27148
+Node: leaf27666
+Node: branch28221
+Node: Optimising ABL usage28848
+Node: Exhaustive or smart29339
+Node: Generating or projecting31660
+Node: Concept index32562
+Node: Bibliography35032
+
+End Tag Table
